@@ -14,7 +14,13 @@ public class PaymentController {
   }
 
   @PostMapping("/refundPayment")
-  public ResponseEntity<PaymentResponse> refund(@RequestBody PaymentRequest request){
+  public ResponseEntity<PaymentResponse> refund(@RequestBody PaymentRequest request) throws InterruptedException {
+    System.out.println("Payment Service - START");
+
+    Thread.sleep(5000);
+
+    System.out.println("Payment Service - END");
+
     return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.refundPayment(request));
   }
 }

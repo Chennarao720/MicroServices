@@ -27,8 +27,9 @@ public class PaymentService {
   }
 
   //refund the payment when we cancel the order
-  public PaymentResponse refundPayment(PaymentRequest request){
+  public PaymentResponse refundPayment(PaymentRequest request) throws InterruptedException {
     Payment payment = paymentRepository.findByOrderId(request.getOrderId()).get();
+    Thread.sleep(5000);
     if (payment.getStatus() == PaymentStatus.SUCCESS) {
       payment.setStatus(PaymentStatus.REFUNDED);
       Payment save = paymentRepository.save(payment);
